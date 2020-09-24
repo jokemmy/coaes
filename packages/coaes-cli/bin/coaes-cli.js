@@ -10,7 +10,7 @@ process.on( 'unhandledRejection', err => {
 const chalk = require( 'chalk' );
 const spawn = require( 'cross-spawn' );
 const download = require( '../lib/download' );
-//fs.existsSync('文件')
+
 
 const excutedDir = process.cwd();
 const scripts = [ 'create', 'init', 'build', 'dev', 'start', 'test' ];
@@ -18,7 +18,7 @@ const args = process.argv.slice( 2 );
 const scriptIndex = args.findIndex( x => scripts.indexOf( x ) !== -1 );
 let script = scriptIndex === -1 ? args[0] : args[scriptIndex];
 const nodeArgs = scriptIndex > 0 ? args.slice( 0, scriptIndex ) : [];
-console.log(args);
+
 switch ( script ) {
   case '-v':
   case '--version':
