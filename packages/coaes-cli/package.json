@@ -1,0 +1,46 @@
+{
+  "name": "coaes-cli",
+  "version": "0.0.0",
+  "description": "coaes cli",
+  "keywords": [
+    "coaes",
+    "webpack",
+    "override",
+    "cli"
+  ],
+  "author": "jokemmy <252133226@qq.com>",
+  "homepage": "http://plomis.com",
+  "license": "ISC",
+  "main": "lib/coaes-cli.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jokemmy/coaes.git"
+  },
+  "bin": {
+    "coaes": "./bin/coaes-cli.js"
+  },
+  "scripts": {
+    "dev": "node ./bin/coaes-cli.js",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/jokemmy/coaes/issues"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "cross-spawn": "^7.0.3",
+    "decompress": "^4.2.1",
+    "got": "^11.7.0",
+    "request": "^2.88.2"
+  }
+}
