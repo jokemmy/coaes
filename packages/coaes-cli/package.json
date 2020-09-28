@@ -40,7 +40,6 @@
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
     "decompress": "^4.2.1",
-    "got": "^11.7.0",
-    "request": "^2.88.2"
+    "progress": "^2.0.3"
   }
 }
