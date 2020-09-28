@@ -4,7 +4,6 @@
 
 
 const path = require( 'path' );
-const spawn = require( 'cross-spawn' );
 const cloneRepo = require( '../lib/cloneRepo' );
 const runInstall = require( '../lib/runInstall' );
 const initStartHelp = require( '../lib/initStartHelp' );
