@@ -5,8 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "lerna-build": "lerna run build",
-    "build": "cross-env BABEL_ENV=commonjs babel packages/coaes-cli/src/lib -d packages/coaes-cli/lib"
+    "build": "node script/build.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
