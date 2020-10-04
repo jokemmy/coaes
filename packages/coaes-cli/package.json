@@ -15,9 +15,6 @@
     "bin",
     "lib"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jokemmy/coaes.git",
@@ -30,7 +27,6 @@
     "url": "https://github.com/jokemmy/coaes/issues"
   },
   "dependencies": {
-    "@babel/cli": "^7.11.6",
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
     "decompress": "^4.2.1",
