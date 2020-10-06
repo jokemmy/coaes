@@ -1,6 +1,6 @@
 {
   "name": "coaes-cli",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Coaes command line.",
   "keywords": [
     "coaes",
@@ -9,7 +9,7 @@
     "cli"
   ],
   "author": "Jokemmy <252133226@qq.com>",
-  "homepage": "http://plomis.com",
+  "homepage": "https://coaes.plomis.com",
   "license": "MIT",
   "files": [
     "bin",

@@ -7,6 +7,16 @@ const { transformFileSync } = require( '@babel/core' );
 
 const root = process.cwd();
 const packages = [{
+  dirname: 'coaes',
+  babelOptions: {
+    envName: 'commonjs',
+    rootMode: 'upward'
+  },
+  transform: [
+    { input: 'src/bin.js', output: 'bin/coaes.js' },
+    { input: 'src', output: 'lib', ignore: 'bin.js' }
+  ]
+}, {
   dirname: 'coaes-cli',
   babelOptions: {
     envName: 'commonjs',
@@ -23,14 +33,17 @@ const packages = [{
 // 3 input file, output file
 packages.forEach(( package ) => {
   const packageRoot = path.join( root, 'packages', package.dirname );
-  package.transform.forEach(({ input, output, test }) => {
+  package.transform.forEach(({ input, output, ignore, test }) => {
     const inputPath = path.join( packageRoot, input );
     const outputPath = path.join( packageRoot, output );
     if ( !fs.existsSync( inputPath )) {
       console.error( `[error] ${inputPath} 文件不存在` );
       process.exit(1);
     } else if ( fs.lstatSync( inputPath ).isDirectory()) {
-      const files = glob.sync( path.join( inputPath, test || '**/*.js' ), { cwd: packageRoot });
+      const files = glob.sync( path.join( inputPath, test || '**/*.js' ), {
+        cwd: packageRoot,
+        ignore: ignore ? path.join( inputPath, ignore ) : []
+      });
       files.forEach(( filePath ) => {
         const relativeFilePath = path.relative( inputPath, filePath );
         const outputFilePath = path.join( outputPath, relativeFilePath );

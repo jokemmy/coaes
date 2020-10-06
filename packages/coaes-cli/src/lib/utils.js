@@ -13,9 +13,9 @@ function log( typeFn, prefix ) {
   }
 }
 
-exports.warn = log( chalk.yellowBright, chalk.yellowBright( ' Warn ' ))
-exports.error = log( chalk.redBright, chalk.bgRed.black( ' error ' ));
-exports.info = log( chalk.whiteBright, chalk.blueBright( ' info ' ));
+exports.warn = log( chalk.yellowBright, chalk.yellowBright( ' WARN ' ))
+exports.error = log( chalk.redBright, chalk.bgRed.black( ' ERROR ' ));
+exports.info = log( chalk.whiteBright, chalk.blueBright( ' INFO ' ));
 exports.log = log();
 
 // 文件夹操作
