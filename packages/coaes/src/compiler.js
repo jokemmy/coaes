@@ -2,27 +2,7 @@
 
 export default function( config, { paths }) {
 
-  const files = glob.sync( path.join( paths.appBuild, '**/*' ), { cwd: config.root });
-  const prevSizeMap = files
-      .filter( fileName => /\.(js|css)$/.test( fileName ))
-      .reduce(( sizeMap, fileName ) => {
-        const contents = fs.readFileSync( fileName );
-        const nameWithoutHash = removeFileNameHash( fileName.replace( paths.appBuild, '' ));
-        sizeMap[nameWithoutHash] = gzipSize( contents );
-        return sizeMap;
-      }, {});
-
-}
-
-  const files = glob.sync( path.join( paths.appBuild, '**/*' ), { cwd: config.root });
-  const prevSizeMap = files
-      .filter( fileName => /\.(js|css)$/.test( fileName ))
-      .reduce(( sizeMap, fileName ) => {
-        const contents = fs.readFileSync( fileName );
-        const nameWithoutHash = removeFileNameHash( fileName.replace( paths.appBuild, '' ));
-        sizeMap[nameWithoutHash] = gzipSize( contents );
-        return sizeMap;
-      }, {});
+  const prevFileSize = getFileSize( paths.appBuild );
 
   fs.emptyDirSync( appBuild );
 
@@ -50,3 +30,4 @@ export default function( config, { paths }) {
 
     resolve();
   });
+}
