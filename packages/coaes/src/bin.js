@@ -11,11 +11,10 @@ program
   .name( "coaes" )
   .usage("<command>")
   .helpOption( '-h, --help', '显示帮助' )
-  .option( '-c, --config-file <path>', '指定配置文件' );
+  .option( '-c, --config-file <configPath>', '指定配置文件' )
+  .option( '-r, --root <dirPath>', '指定运行目录' );
 
 
 program.parse( process.argv );
 
-if ( program.configFile ) {
-  App( program.opts());
-}
+App( program.opts());

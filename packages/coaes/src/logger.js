@@ -21,7 +21,7 @@ const logLevel = {
 const noop = function() {};
 
 // 消息输出
-function log( typeFn, prefix ) {
+function logger( typeFn, prefix ) {
   return function( data, ...args ) {
     const words = typeFn ? typeFn( data ) : data;
     return prefix ? console.log( prefix + words, ...args ) : console.log( words, ...args ) ;
@@ -35,8 +35,9 @@ function logSwitch( levelName, logFn ) {
 }
 
 export const debug = ( ...args ) => {
-  return ( process.env.COAES_DEBUG ? logSwitch( 'debug', log( chalk.grey, chalk.greenBright( ' DEBUG ' ))) : noop )( ...args );
+  return ( process.env.COAES_DEBUG ? logSwitch( 'debug', logger( chalk.grey, chalk.greenBright( ' DEBUG ' ))) : noop )( ...args );
 };
-export const info = logSwitch( 'info', log( chalk.whiteBright, chalk.blueBright( ' INFO ' )));
-export const warn = logSwitch( 'warn', log( chalk.yellowBright, chalk.yellowBright( ' WARN ' )));
-export const error = logSwitch( 'error', log( chalk.redBright, chalk.bgRed.black( ' ERROR ' )));
+export const info = logSwitch( 'info', logger( chalk.whiteBright, chalk.blueBright( ' INFO ' )));
+export const warn = logSwitch( 'warn', logger( chalk.yellowBright, chalk.yellowBright( ' WARN ' )));
+export const error = logSwitch( 'error', logger( chalk.redBright, chalk.bgRed.black( ' ERROR ' )));
+export const log = logger();

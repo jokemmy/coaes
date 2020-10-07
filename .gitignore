@@ -103,6 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# build cjs and es
-lib
-es
+# build
+packages/*/lib/*
+packages/*/bin/*
