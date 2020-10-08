@@ -8,6 +8,8 @@ export default {
   manifest: '',
   build: 'dist',
   plugins: [],
+  engine: null,
+  extend: null,
   webpack: ( config ) => config
   // indexTemplate: '',
   // mountElementId: 'root'

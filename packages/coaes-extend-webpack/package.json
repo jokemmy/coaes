@@ -1,16 +1,15 @@
 {
-  "name": "coaes",
+  "name": "coaes-extend-webpack",
   "version": "1.0.0",
-  "description": "核心库",
+  "description": "Webpack 功能支持",
   "keywords": [
     "coaes",
-    "webpack",
-    "override"
+    "webpack"
   ],
   "author": "jokemmy <252133226@qq.com>",
   "homepage": "https://coaes.plomis.com",
-  "license": "MIT",
-  "main": "src/index.js",
+  "license": "ISC",
+  "main": "lib/coaes-extend-webpack.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -23,25 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jokemmy/coaes.git",
-    "directory": "packages/coaes"
+    "url": "git+https://github.com/jokemmy/coaes.git"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/jokemmy/coaes/issues"
-  },
-  "dependencies": {
-    "assert": "^2.0.0",
-    "chalk": "^4.1.0",
-    "commander": "^6.1.0",
-    "dotenv": "^8.2.0",
-    "filesize": "^6.1.0",
-    "fs-extra": "^9.0.1",
-    "json5": "^2.1.3",
-    "log4js": "^6.3.0",
-    "strip-ansi": "^6.0.0",
-    "whatitis": "^1.1.2"
   }
 }
