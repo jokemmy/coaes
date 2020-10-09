@@ -10,7 +10,7 @@ export default {
   plugins: [],
   engine: null,
   extend: null,
-  webpack: ( config ) => config
+  override: ( config ) => config
   // indexTemplate: '',
   // mountElementId: 'root'
 };

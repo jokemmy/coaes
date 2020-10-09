@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 import filesize from 'filesize';
 import stripAnsi from 'strip-ansi';
 import { sync as gzipSize } from 'gzip-size';
-import { log } from './logger';
+import { log } from '../../coaes/src/logger';
 
 
 function removeFileNameHash( fileName ) {

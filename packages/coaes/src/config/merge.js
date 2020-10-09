@@ -1,5 +1,5 @@
 
 
-export default function( configA, configB ) {
+export function merge( configA, configB ) {
   return Object.assign( configA, configB );
 }

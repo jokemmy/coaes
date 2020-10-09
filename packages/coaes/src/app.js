@@ -1,16 +1,13 @@
 
-// import fs from 'fs';
 import is from 'whatitis';
-// import webpack from 'webpack';
+import omit from 'object.omit';
+import invariant from 'invariant';
 import getPaths from './paths';
-// import { getFileSize } from './showSize';
-// import { error, info } from './logger';
-import merge from './config/merge';
-import loadConfig from './config/load';
-import configDefault from './config/config.default';
-import { loadModule } from './utils';
-// import configWebpack from './config/config.webpack';
-// import engine from './engine';
+import Events from './events';
+import compose from './compose';
+import { loadExtend, loadEngine, loadPlugin } from './loadModule';
+import getBinArgs from './getBinArgs';
+import getConfig from './getConfig';
 
 
 /**
@@ -19,20 +16,58 @@ import { loadModule } from './utils';
  *
  * coaes --configFile ./coaes.config.js
  */
-export default function App( binArgs ) {
+function App( config ) {
 
-  const { configFile } = binArgs;
-  const config = merge( configDefault, loadConfig( configFile ));
-  const paths = getPaths( config );
-  const context = { env: process.env.NODE_ENV, paths };
+  const app = new Events;
+  let packConfig = {};
+  let extend = null;
+  let engine = null;
+  let plugins = [];
 
-  // 运行配置转换逻辑初始化
-  if ( config.extend ) {
-    const extend = loadModule( config.extend );
-    if ( extend ) {
-      extend( config, context );
-    }
+  app.config = config;
+  app.context = { env: process.env.NODE_ENV, paths: getPaths( app.config ), cwd: app.config.root };
+
+  app.getPackConfig = () => packConfig;
+  app.setPackConfig = ( newConfig ) => packConfig = newConfig;
+
+  const keys = Object.keys( app );
+  app.extend = ( extra ) => {
+    Object.assign( app, omit( extra, [ ...keys, 'extend' ]));
   }
+
+  if ( config.extend ) {
+    extend = loadExtend( config.extend );
+    invariant( is.Function( extend ), `${config.extend} 加载错误` );
+    extend({ ...app });
+  }
+
+  // 扩展 run 函数
+  app.run = function() {};
+  if ( extend ) {
+    engine = loadEngine( config.engine );
+    invariant( is.Function( engine ), `${config.engine} 加载错误` );
+    app.run = engine({ ...app });
+    invariant( is.Function( app.run ), `${config.engine} 没有提供有效的执行方法` );
+  }
+
+  if ( engine ) {
+    config.plugins.forEach(( id ) => {
+      const plugin = loadPlugin( id );
+      if ( plugin ) {
+        invariant( is.Function( plugin ), `${id} 加载错误` );
+        plugins.push( plugins );
+      }
+    });
+    app.setPackConfig(
+      plugins.reduce(( lastConfig, plugin ) => plugin( lastConfig, app.context ), app.getPackConfig())
+    );
+  }
+
+  if ( is.Function( app.config.override )) {
+    app.setPackConfig( app.config.override( app.getPackConfig()));
+  }
+
+  app.run( app.getPackConfig());
 
   // 1.提供默认配置 进行配置转换 提供转换工具函数 扩展APPCONFIG
   // 是否分析，别名，模板相关，目录
@@ -41,36 +76,8 @@ export default function App( binArgs ) {
   // 3.加载插件，根据engine的要求修改配置
   // 4.运行配置
 
-
-  // plugins
-  // packConfig context { ..., config }
-
-  // 运行打包逻辑初始化
-  if ( config.engine ) {
-    const engine = loadModule( config.engine );
-    if ( engine ) {
-      engine( config, context );
-    }
-  }
-
-
-  // 通用打包逻辑
-  // console.log(config);
-
-  // config.plugins.forEach(( plugin ) => {
-  //   plugin.extend( config, context );
-  // });
-
-  // config.plugins.forEach(( plugin ) => {
-  //   plugin.execute( config, context );
-  // });
-
-
-
-  /**
-   * alias
-   */
-  return {
-
-  };
+  return app;
 };
+
+
+export default compose( App, getConfig, getBinArgs );

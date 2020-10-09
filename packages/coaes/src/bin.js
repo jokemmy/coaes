@@ -2,7 +2,19 @@
 
 
 import { Command } from 'commander';
+import './env';
 import App from '../lib/app'
+import { error, log } from '../lib/logger'
+
+
+function handleError( err ) {
+  log();
+  error( err );
+  log();
+  process.exit(1);
+}
+process.on( 'unhandledRejection', handleError );
+process.on( 'uncaughtException', handleError );
 
 
 const program = new Command();
