@@ -3,7 +3,11 @@ module.exports = {
   babelrcRoots: [ ".", "packages/*" ],
   presets: [
     [ "@babel/env", {
-      corejs: 2,
+      corejs: {
+        version: 3,
+        proposals: true
+      },
+      // corejs: 2,
       useBuiltIns: "usage",
       targets: {
         node: 7

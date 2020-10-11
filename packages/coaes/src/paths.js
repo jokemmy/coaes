@@ -2,10 +2,10 @@
 import path from 'path';
 
 
-export default ({ cwd, build }) => {
+export default ({ root, build }) => {
   return {
-    appSrc: path.join( cwd, './src' ),
-    appBuild: path.join( cwd, build ),
-    appNodeModules: path.join( cwd, './node_modules' )
+    appSrc: path.join( root, './src' ),
+    appBuild: path.join( root, build ),
+    appNodeModules: path.join( root, './node_modules' )
   };
 }

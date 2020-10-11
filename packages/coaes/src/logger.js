@@ -23,12 +23,14 @@ const noop = function() {};
 // 消息输出
 function logger( typeFn, prefix ) {
   return function( data, ...args ) {
-    const words = typeFn ? typeFn( data ) : data;
+    const words = ( typeFn ? typeFn( data ) : data ) || '';
     return prefix ? console.log( prefix + words, ...args ) : console.log( words, ...args ) ;
   }
 }
 
 function logSwitch( levelName, logFn ) {
+  const only = process.env.COAES_LOG_ONLY;
+  const ignore = process.env.COAES_LOG_IGNORE;
   return ( ...args ) => ( process.env.COAES_LOG &&
     ( only ? only.indexOf( levelName ) !== -1 : ( !ignore || ignore.indexOf( levelName ) === -1 )) &&
     logLevel[levelName] > logLevel[process.env.COAES_LOG_LEVEL] ? logFn : noop )( ...args );

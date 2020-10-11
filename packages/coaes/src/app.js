@@ -1,6 +1,6 @@
 
 import is from 'whatitis';
-import omit from 'object.omit';
+// import omit from 'object.omit';
 import invariant from 'invariant';
 import getPaths from './paths';
 import Events from './events';

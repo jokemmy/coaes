@@ -6,7 +6,7 @@ const loadModule = ( prefix ) => {
     const requireTarget = function() {
       try {
         subModule = require( moduleNames.pop());
-      } catch() {
+      } catch( e ) {
         if ( moduleNames.length > 0 ) {
           requireTarget();
         }

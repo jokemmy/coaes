@@ -4,13 +4,13 @@ export default {
   analyze: true,
   basename: '/',
   hash: '',
-  history: 'browser',
+  // history: 'browser',
   manifest: '',
   build: 'dist',
   plugins: [],
   engine: null,
   extend: null,
-  override: ( config ) => config
+  override: ( packConfig ) => packConfig
   // indexTemplate: '',
   // mountElementId: 'root'
 };

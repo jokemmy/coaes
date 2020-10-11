@@ -14,10 +14,10 @@ export default function( binArgs ) {
   const appArgs = {};
 
   // 配置文件
-  if ( binArgs.configFile ) {
+  if ( binArgs.config ) {
 
-    invariant( fs.existsSync( path.join( root, binArgs.configFile )), '指定的配置文件不存在' );
-    appArgs.configFile = binArgs.configFile;
+    invariant( fs.existsSync( path.join( root, binArgs.config )), '指定的配置文件不存在' );
+    appArgs.config = binArgs.config;
 
   } else {
 
@@ -25,7 +25,7 @@ export default function( binArgs ) {
       .map(( fileName ) => path.join( root, `./${fileName}` ))
       .find(( filePath ) => fs.existsSync( filePath ));
     if ( filePath ) {
-      appArgs.configFile = filePath;
+      appArgs.config = filePath;
     }
     //「 else 的情况使用默认配置 」
   }

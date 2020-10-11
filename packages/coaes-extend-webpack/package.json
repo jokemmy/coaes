@@ -29,5 +29,9 @@
   },
   "bugs": {
     "url": "https://github.com/jokemmy/coaes/issues"
+  },
+  "dependencies": {
+    "invariant": "^2.2.4",
+    "whatitis": "^1.2.0"
   }
 }

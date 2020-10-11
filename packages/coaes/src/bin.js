@@ -2,7 +2,7 @@
 
 
 import { Command } from 'commander';
-import './env';
+import '../lib/env';
 import App from '../lib/app'
 import { error, log } from '../lib/logger'
 
@@ -10,8 +10,9 @@ import { error, log } from '../lib/logger'
 function handleError( err ) {
   log();
   error( err );
+  log( err )
   log();
-  process.exit(1);
+  process.exit(0);
 }
 process.on( 'unhandledRejection', handleError );
 process.on( 'uncaughtException', handleError );
