@@ -3,7 +3,12 @@ export default {
   mode: 'development',
   devtool: 'cheap-module-source-map',
   // entry: getEntry(['./src/index.js']),
-  // output: getOutput(),
+  output: {
+    // publicPath: '/',
+    // path: path.resolve( process.cwd(), './dist' ),
+    filename: '[name].js',
+    chunkFilename: '[id].chunk.js'
+  },
   resolve: {
     modules: [
       paths.appSrc,

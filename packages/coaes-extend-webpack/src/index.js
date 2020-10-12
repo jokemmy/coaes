@@ -11,16 +11,19 @@
  *    engine: null,
  *    extend: null,
  *    override: ( config ) => config
+ *
  *    // extend-webpack
- *    indexTemplate: '',
- *    mountElementId: 'root'
+ *    // indexTemplate: '',
+ *    // mountElementId: 'root'
  *    manifest: true,
+ *    noParse: RegExp [RegExp] function(resource) string [string]
+ *    // history: 'browser',
  *  }
  *
  */
 
-import path from 'path';
 import validate from './validate';
+import urlLoader from './loaders/urlLoader';
 import devConfig from './webpack.config.dev';
 import prodConfig from './webpack.config.prod';
 
@@ -29,23 +32,30 @@ export default function({ context, config }) {
 
   validate( config );
 
-  const { hash } = config;
+  const { hash, static, noParse } = config;
+  const isDev = context.env === 'development';
+  let defaultConfig = isDev ? devConfig : prodConfig;
+
+  let staticFileName = `${static}/[name].[ext]`;
   const output = {
-    publicPath: config.basename,
     path: paths.appBuild,
-    filename: '[name].js',
-    chunkFilename: '[id].chunk.js'
+    publicPath: config.basename,
+    // 默认配置中添加
+    // filename: '[name].js',
+    // chunkFilename: '[id].chunk.js'
   };
 
-  if ( hash === 'hash' || hash === 'chunkhash' || hash === 'contenthash' ) {
-    output.chunkFilename = chunkFilename.replace( /\.js/, `.[${hash}].js` );
+  if ( /^(hash|chunkhash|contenthash)/.test( hash )) {
+    output.filename = output.filename.replace( /\.js$/, `.$[${hash}].js` );
+    output.chunkFilename = output.chunkFilename.replace( /\.js$/, `.$[${hash}].js` );
+    staticFileName = staticFileName.replace( /\.\[ext\]$/, `.$[${hash}].[ext]` );
   }
 
+  const module = {
+    noParse,
+    rules: []
+  };
 
-
-  if ( context.env === 'development' ) {
-
-  }
-
+  Object.assign( defaultConfig, { output, module });
 
 }

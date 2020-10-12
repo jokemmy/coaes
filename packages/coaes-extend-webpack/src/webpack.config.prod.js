@@ -1,8 +1,13 @@
 export default {
   mode: 'production',
-  bail: true,
-  entry: getEntry([ './src/common.js', './src/index.js' ]),
-  output: getOutput( output ),
+  // bail: true,
+  // entry: getEntry([ './src/common.js', './src/index.js' ]),
+  output: {
+    // publicPath: '/',
+    // path: path.resolve( process.cwd(), './dist' ),
+    filename: '[name].$[contenthash:6].js',
+    chunkFilename: '[id].chunk.$[contenthash:6].js'
+  },
   resolve: {
     modules: [
       paths.appSrc,

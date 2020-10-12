@@ -22,7 +22,12 @@ export default function( config ) {
   );
 
   invariant(
-    config.hash && is.oneOf([ 'none', 'hash', 'chunkHash', 'contentHash' ])( config.hash ),
+    config.static && is.String( config.static ),
+    'config.static 的值不合法'
+  );
+
+  invariant(
+    /^none$|^(hash|chunkhash|contenthash):[1-9]\d*$/.test( config.hash ),
     'config.hash 的值不合法'
   );
 
